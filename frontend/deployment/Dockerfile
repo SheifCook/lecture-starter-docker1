@@ -1,7 +1,30 @@
-FROM node:20-alpine as build
+# ==========================================
+# ЭТАП 1: Сборка фронтенда (Builder Stage)
+# ==========================================
+FROM node:20-alpine AS builder
 
-# Add configuration here
+WORKDIR /app
 
-FROM nginx:1.22.1
+# Копируем файлы зависимостей
+COPY package*.json ./
 
-# Add configuration here
+# Устанавливаем пакетные зависимости
+RUN npm ci
+
+# Копируем остальные файлы фронтенда и запускаем сборку
+COPY . .
+RUN npm run build
+
+# ==========================================
+# ЭТАП 2: Финальный образ с веб-сервером Nginx
+# ==========================================
+FROM nginx:alpine
+
+# Копируем скомпилированные статические файлы из этапа builder в Nginx
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Открываем 80 порт для веб-трафика
+EXPOSE 80
+
+# Запускаем Nginx в фоновом режиме
+CMD ["nginx", "-g", "daemon off;"]
