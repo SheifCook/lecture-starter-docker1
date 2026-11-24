@@ -8,6 +8,7 @@ WORKDIR /app
 ARG VITE_BACKEND_URL=http://localhost:4001
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 
+
 # Копируем только файлы зависимостей
 COPY package.json package-lock.json ./
 
