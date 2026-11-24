@@ -1,0 +1,11 @@
+.vs/
+node_modules
+dist
+build
+.git
+*.log
+README.md
+.env
+.env.*
+.nvmrc
+.eslintrc.cjs

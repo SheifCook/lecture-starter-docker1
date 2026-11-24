@@ -4,20 +4,21 @@ FROM node:20-alpine
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы зависимостей (для кэширования слоев)
-COPY package*.json ./
+# Копируем только файлы зависимостей (для кэширования слоев)
+COPY package.json package-lock.json ./
 
 # Устанавливаем зависимости
 RUN npm ci
 
-# Копируем весь остальной код бекенда
-COPY . .
+# Копируем только исходный код (без node_modules, .git и т.д.)
+COPY src/ ./src/
+COPY tsconfig.json ./
 
 # Собираем TypeScript проект
 RUN npm run build
 
-# Открываем порт (по методичке 4001)
+# Открываем порт
 EXPOSE 4001
 
-# Команда запуска скомпилированного JS
+# Команда запуска
 CMD ["node", "dist/index.js"]

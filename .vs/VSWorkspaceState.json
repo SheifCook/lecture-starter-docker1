@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\deployment",
+    "\\frontend",
+    "\\frontend\\deployment",
+    "\\frontend\\public"
+  ],
+  "SelectedNode": "\\frontend\\.dockerignore",
+  "PreviewInSolutionExplorer": false
+}
