@@ -7,6 +7,6 @@
     "\\frontend\\deployment",
     "\\frontend\\public"
   ],
-  "SelectedNode": "\\frontend\\.dockerignore",
+  "SelectedNode": "\\backend\\deployment\\Dockerfile",
   "PreviewInSolutionExplorer": false
 }
